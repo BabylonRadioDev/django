@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block content %}
+<hr>
+<ul>
+    <table>
+        {% for eve in eventList %}
+            <tr>
+                <td><strong>Event Name :</strong> {{ eve.title }}</td>
+                <td>  ||  </td>
+                <td><strong>Start at :</strong> {{ eve.date_start }} - <strong>End at : </strong> {{ eve.date_end }}</td>
+            </tr>
+            <tr>
+                <td><a href="http://localhost:8000/event/{{ eve.id }}">More Information & ticket</a><br></td>
+                <td>  ||  </td>
+                <td>{% if eve.paying == 1 %}  
+                        <strong>Price : </strong>$ $ $
+                    {% else %}
+                        <strong>Price : </strong> Free
+                    </td>
+                    {% endif %}
+            </tr>
+        <br><br>
+    </table><br>
+    
+</ul>
+<img src="{{ eve.main_image.url }}" />
+{% endfor %}
+<br>
+<hr>
+{% endblock %}

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+   <link rel="stylesheet" href="/media/css/style.css" />
+   <title>{% block title %}App on Event{% endblock %}</title>
+</head>
+<body>
+<header><h1><a href="http://localhost:8000/events">Events</a></h1></header>
+    <nav>
+       {% block nav %}
+
+       {% endblock %}
+   </nav>
+   <section id="content">
+       {% block content %}{% endblock %}
+   </section>
+<footer>&copy; Event app</footer>
+</body>
+</html>

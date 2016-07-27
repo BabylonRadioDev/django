@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Events</h1>
+<ul>
+{% for event in object_list %}
+    <li>{{ event.title }} - {{ event.location }}</li>
+    <li><img src="{{ event.main_image.url }}" /></li>
+{% empty %}
+    <li>No Event yet.</li>
+{% endfor %}
+</ul>
+{% endblock %}
