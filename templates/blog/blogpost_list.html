@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <section id="about-us">
+        <div class="container center wow fadeInDown animated">
+            <div class="row">
+
+                    <div class="col-md-3 col-xs-12 visible-md-*">
+
+                         <h4>News:</h4>
+                        {% for post in object_list %}
+                        <p>{{ post.title }}</p>
+                        {% if post.image %}<img src="{{ post.image.url }}" />{% endif %}
+                        <p>{{ post.body }}</p>
+                        {% endfor %}
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
