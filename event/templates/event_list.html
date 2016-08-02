@@ -1,13 +1,10 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1>Events</h1>
-<ul>
-{% for event in object_list %}
-    <li>{{ event.title }} - {{ event.location }}</li>
-    <li><img src="{{ event.main_image.url }}" /></li>
-{% empty %}
-    <li>No Event yet.</li>
-{% endfor %}
-</ul>
+<h3>Events</h3>
+    {% for event in object_list %}
+        <h2><a href="{{ event.slug }}">{{ event.title }}</a></h2>
+        {% if event.main_image %}<img src="{{ event.main_image.url }}" class="img-responsive"/>{% endif %}
+        <p>{{ event.description.html|truncatechars:9|safe }}</p>
+    {% endfor %}
 {% endblock %}

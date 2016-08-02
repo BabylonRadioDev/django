@@ -5,7 +5,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 # from tinymce.widgets import TinyMCE
-from tinymce.models import HTMLField
+from sirtrevor.fields import SirTrevorField
 
 # Create your models here.
 
@@ -40,7 +40,8 @@ class Category(models.Model):
 class BlogPost(models.Model):
     title = models.CharField(max_length=100)
     slug = AutoSlugField(populate_from='title')
-    body = HTMLField()
+    intro = models.TextField()
+    body = SirTrevorField()
     image = models.ImageField(upload_to=upload_location,
                               null=True,
                               blank=True,

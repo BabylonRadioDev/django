@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block head_title %} {{ object.title }} | {{ block.super }}{% endblock %}
+
+{% block content %}
+
+<h3>{{ object.title }} <small>{{ object.author }}</small></h3>
+<img src="{{ object.main_image.url }}" class="img-responsive"/>
+
+<p>{{ object.description.html|safe }}</p>
+
+
+{% endblock %}
