@@ -1,10 +1,118 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h3>Events</h3>
-    {% for event in object_list %}
-        <h2><a href="{{ event.slug }}">{{ event.title }}</a></h2>
-        {% if event.main_image %}<img src="{{ event.main_image.url }}" class="img-responsive"/>{% endif %}
-        <p>{{ event.description.html|truncatechars:9|safe }}</p>
-    {% endfor %}
+<div class="container">
+    <div class="row">
+     {% for eve in eventList %}
+        <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 ">
+            <div class="hovereffect">
+                <img src="{{ eve.image.url }}">
+                <div class="overlay">
+                    <h2>{{ eve.title }}</h2>
+                        <a class="info2">{{ eve.date_start|date:'d M Y - H:m' }}</a>
+                        <a href="{{ eve.slug }}" class="info">More Information</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    <!--
+    <div class="col-lg-7">
+        <table class="table table-hover">
+               <center><thead class="thead">
+               <tr>
+                  <th></th>
+                  <th></th>
+                  <th></th>
+                  <th></th>
+                </tr>
+              </thead></center>
+            <div class="pagination">
+            {% for eve in eventList %}
+                <tr>
+                    <td><strong>{{ eve.title }}</strong><br>{{ eve.date_start|date:'H:m - d M Y' }}</td>
+                    <td><strong>End at : </strong> {{ eve.date_end }}</td>
+                    <td>{% if eve.paying == 1 %}
+                            $ $
+                        {% else %}
+                            Free
+                        {% endif %}
+                    </td>
+
+                    <td><a href="http://localhost:8000/event/{{ eve.id }}">Click !</a></td>
+                </tr>
+            {% endfor %}<br><br>
+        </div></table>
+    </div>
+     -->
+    <div class="col-lg-6 col-md-4 col-sm-6 col-xs-6">
+    <!-- Responsive calendar - START -->
+        <div class="responsive-calendar">
+            <div class="controls">
+                <a class="pull-left" data-go="prev"><div class="btn btn-primary">Prev</div></a>
+                <h4><span data-head-year></span> <span data-head-month></span></h4>
+                <a class="pull-right" data-go="next"><div class="btn btn-primary">Next</div></a>
+            </div><hr/>
+            <div class="day-headers">
+              <div class="day header">Mon</div>
+              <div class="day header">Tue</div>
+              <div class="day header">Wed</div>
+              <div class="day header">Thu</div>
+              <div class="day header">Fri</div>
+              <div class="day header">Sat</div>
+              <div class="day header">Sun</div>
+            </div>
+            <div class="days" data-group="days">
+
+            </div>
+        </div>
+    <!-- Responsive calendar - END -->
+    </div>
+</div>
+
+
+<!-- credit calendar : http://w3widgets.com/responsive-calendar/#licenseModal -->
+<script src="static/js/jquery.js"></script>
+<script src="static/js/bootstrap.min.js"></script>
+<script src="static/js/responsive-calendar.js"></script>
+<script type="text/javascript">
+    $(document).ready(function (){
+        $(".responsive-list").responsiveList({
+           this.time=new Date();
+           this.currentYear=this.time.getFullYear();
+           this.currentMonth=this.time.getMonth();
+           {% for eve in eventList %}
+                if({{ eve.date_start|date:'Y' }} == currentYear){
+                    alert("{{ eve.title }}");
+                    if({{ eve.date_start|date:'M' }} == currentMonth){
+                        alert("{{ eve.title }}");
+                    }
+                    else{
+                        alert("Nop nop nop");
+                    }
+                }else{
+                        alert("Nop nop nop");
+                    }
+            {% endfor %}
+        });
+    });
+</script>
+<script type="text/javascript">
+  $(document).ready(function () {
+    $(".responsive-calendar").responsiveCalendar({
+      time: '2016-07',
+      events: {
+        {% for eve in eventList %}
+            {% for eve2 in eventList %}
+                "{{ eve.date_start|date:'Y-m-d' }}":  {"number": 1, "url": "http://localhost:8000/event/{{ eve.id }}"},
+            {% endfor %}
+        {% endfor %}
+            "1994-05-25": {}
+        }
+
+    });
+  });
+</script>
+
+<br>
 {% endblock %}

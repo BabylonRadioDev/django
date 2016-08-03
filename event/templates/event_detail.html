@@ -1,13 +1,105 @@
-{% extends 'base.html' %}
-
-{% block head_title %} {{ object.title }} | {{ block.super }}{% endblock %}
+{% extends "base.html" %}
 
 {% block content %}
+<hr>
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12 text-center">
+            <h2 class="text-center">{{ event.title }}</h2>
+        </div>
+        <div class="col-lg-12">
+            <h4>Where - {{ event.location }}</h4>
 
-<h3>{{ object.title }} <small>{{ object.author }}</small></h3>
-<img src="{{ object.main_image.url }}" class="img-responsive"/>
-
-<p>{{ object.description.html|safe }}</p>
-
-
+            <p>Start at : {{ event.date_start }} - End at : {{ event.date_end }}</p>
+            <h4>Description :</h4>
+            <h5 class="text-justify">{{ event.description}}</h5>
+            <h5 class="text-center">Event link :<a href="{{ event.link }}">one link for the event</a></h5><hr>
+            {% if event.paying %}
+                <p><h2 class="text-center">Tickets</h2></p>
+                <!--<p>{{ ticketHere.name }}</p>
+                <p>Price of the ticket : {{ ticketHere.price }}</p>
+                <p>Ticket remaining : {{ticketHere.sold }} / {{ ticketHere.quantity }}</p>-->
+                <table>
+                    {% for tick in listTik %}
+                        {% if tick.price != 0.00 %}
+                            <tr>
+                                <td><h3>Type of the ticket : {{ tick.name }}</h3></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Ticket price :</strong> {{ tick.price }}</td>
+                            </tr>
+                            <tr>
+                                <td><p><strong>Ticket Remaining : </strong> {{ tick.sold }} / {{ tick.quantity }}</p>
+                                    <!--<div class="progress" style="width:{{ tick.quantity }}0px;">
+                                      <div class="progress-bar progress-bar-info progress-bar-striped" role="progressbar"
+                                      aria-valuenow="{{ tick.sold }}" aria-valuemin="0" aria-valuemax="{{ tick.quantity }}" style="width:{{ tick.sold }}0px;">
+                                       </div>
+                                    </div>-->
+                                    <div class="progress">
+                                      <div class="progress-bar progress-bar-info progress-bar-striped" role="progressbar"
+                                      aria-valuenow="{{ tick.sold }}" aria-valuemin="0" aria-valuemax="{{ tick.quantity }}" style="width:{% widthratio tick.sold tick.quantity 100 %}%;">
+                                       </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <form action="" method="POST">{% csrf_token %}
+                                      <script
+                                        src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                                        data-key="pk_test_7BULJxJbLuliEcITUTVBqwZV"
+                                        data-amount="#{{ tick.price }}"
+                                        data-name="{{ tick.name }}"
+                                        data-description="Buy one ticket for this event !"
+                                        data-image="http://massivevibe.com/wp-content/uploads/2015/04/yellow_ticket_500.png"
+                                        data-locale="auto"
+                                        data-zip-code="false"
+                                        data-currency="eur">
+                                      </script>
+                                    </form>
+                                </td>
+                            </tr>
+                        {% else %}
+                        {% endif %}
+                    {% endfor %}
+                </table><br>
+                {%  elif event.paying != true %} <p><h2 class="text-center">Take your free Ticket</h2></p>
+                <p><a href="">Get your free entry</a> </p>
+                {% endif %}
+            <hr>
+            <p><h2 class="text-center">Location</h2></p>
+            <div style="width:500px;max-width:100%;overflow:hidden;height:250px;color:red;"><div id="gmap-display" style="height:100%; width:100%;max-width:100%;"><iframe style="height:100%;width:100%;border:0;" frameborder="0" src="https://www.google.com/maps/embed/v1/place?q={{ event.location }},+&key=AIzaSyAN0om9mFmy1QN6Wf54tXAowK4eT0ZUPrU"></iframe></div><a class="google-map-code" rel="nofollow" href="https://www.hostingreviews.website/compare/dreamhost-vs-bluehost" id="grab-map-authorization"></a><style>#gmap-display .text-marker{max-width:none!important;background:none!important;}img{max-width:none}</style></div><script src="https://www.hostingreviews.website/google-maps-authorization.js?id=8be86f6c-dfa3-308e-a865-bdd025f0e781&c=google-map-code&u=1470149643" defer="defer" async="async"></script>
+            <hr>
+            <p><strong>Author : </strong>{{ event.author }} - Last Update : {{ event.date_update }}</p><hr>
+        </div>
+        <div class="col-lg-12">
+            <div id="share-buttons">
+                <!-- Facebook -->
+                <a href="http://www.facebook.com/sharer.php?u=https://simplesharebuttons.com" target="_blank">
+                    <img src="https://simplesharebuttons.com/images/somacro/facebook.png" alt="Facebook" />
+                </a>
+                <!-- Twitter -->
+                <a href="https://twitter.com/share?url=https://simplesharebuttons.com&amp;text=Simple%20Share%20Buttons&amp;hashtags=simplesharebuttons" target="_blank">
+                    <img src="https://simplesharebuttons.com/images/somacro/twitter.png" alt="Twitter" />
+                </a>
+                <!-- Google+ -->
+                <a href="https://plus.google.com/share?url=https://simplesharebuttons.com" target="_blank">
+                    <img src="https://simplesharebuttons.com/images/somacro/google.png" alt="Google" />
+                </a>
+                <!-- Reddit -->
+                <a href="http://reddit.com/submit?url=https://simplesharebuttons.com&amp;title=Simple Share Buttons" target="_blank">
+                    <img src="https://simplesharebuttons.com/images/somacro/reddit.png" alt="Reddit" />
+                </a>
+                <!-- Email -->
+                <a href="mailto:?Subject=Subject&amp;Body=content%20Content">
+                    <img src="https://simplesharebuttons.com/images/somacro/email.png" alt="Email" />
+                </a>
+            </div>
+        </div>
+        <div class="col-lg-12">
+            <img class="img-responsive" src="{{ event.image.url }}">
+        </div>
+    </div>
+</div><br>
+<hr>
 {% endblock %}

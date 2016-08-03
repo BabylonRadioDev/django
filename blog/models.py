@@ -52,7 +52,7 @@ class BlogPost(models.Model):
     category = models.ForeignKey(Category, null=True, blank=True)
     author = models.ForeignKey(User)
     status = models.CharField(max_length=1, choices=STATUS_CHOICES, default='d')
-    timestamp = models.DateTimeField(auto_now=False, auto_now_add=True)
+    timestamp = models.DateTimeField(db_index=True, auto_now=False, auto_now_add=True)
     updated = models.DateTimeField(auto_now=True, auto_now_add=False)
 
 
