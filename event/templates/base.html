@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <!-- Link to the file in static : js/css -->
+      <meta charset="utf-8">
+      <link rel="stylesheet" href="../../static/js/responsive-calendar.css" />
+      <link rel="stylesheet" href="../../static/css/hoverimage.css" />
+      <script src="http://code.jquery.com/jquery-2.1.0.min.js"></script>
+      <link href='http://fonts.googleapis.com/css?family=Economica' rel='stylesheet' type='text/css'>
+      <!-- Bootstrap -->
+      <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
+      <title>{% block title %}App on Event{% endblock %}</title>
+    <style type="text/css">
+    </style>
+  </head>
+  <body>
+    <!-- Sub menu for the event part ? -->
+  <header><h1 class="jumbotron"><a href="http://localhost:8000/events">Events</a></h1></header>
+      <nav>
+         {% block nav %}
+
+         {% endblock %}
+     </nav>
+     <section id="content">
+      <!-- Content of list or details -->
+         {% block content %}{% endblock %}
+     </section>
+
+  <footer class="panel-footer">&copy; Event app</footer>
+  </body>
+</html>

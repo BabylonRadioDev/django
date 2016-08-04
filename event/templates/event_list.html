@@ -1,8 +1,11 @@
 {% extends "base.html" %}
 
 {% block content %}
+<!-- link to events list page -->
+<h1 class="jumbotron"><a href="http://localhost:8000/events">Events</a></h1>
 <div class="container">
     <div class="row">
+      <!-- galery fot the event with bootstrap tags -->
      {% for eve in eventList %}
         <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 ">
             <div class="hovereffect">
@@ -68,13 +71,22 @@
         </div>
     <!-- Responsive calendar - END -->
     </div>
+
+    <!-- try list responsive -->
+    <div class="col-lg-6 col-md-4 col-sm-6 col-xs-6">
+        <div class="responsive-list">
+
+        </div>
+    </div>
+
 </div>
 
 
-<!-- credit calendar : http://w3widgets.com/responsive-calendar/#licenseModal -->
-<script src="static/js/jquery.js"></script>
-<script src="static/js/bootstrap.min.js"></script>
-<script src="static/js/responsive-calendar.js"></script>
+<!-- Scripts -->
+<script src="../../static/js/jquery.js"></script>
+<script src="../../static/js/bootstrap.min.js"></script>
+<script src="../../static/js/responsive-calendar.js"></script>
+<!-- script test  -->
 <script type="text/javascript">
     $(document).ready(function (){
         $(".responsive-list").responsiveList({
@@ -97,14 +109,15 @@
         });
     });
 </script>
+<!-- credit calendar : http://w3widgets.com/responsive-calendar/#licenseModal -->
 <script type="text/javascript">
   $(document).ready(function () {
     $(".responsive-calendar").responsiveCalendar({
-      time: '2016-07',
+      time: '2016-08',
       events: {
         {% for eve in eventList %}
             {% for eve2 in eventList %}
-                "{{ eve.date_start|date:'Y-m-d' }}":  {"number": 1, "url": "http://localhost:8000/event/{{ eve.id }}"},
+                "{{ eve.date_start|date:'Y-m-d' }}":  {/*"number": 1, */"url": "http://localhost:8000/event/{{ eve.id }}"},
             {% endfor %}
         {% endfor %}
             "1994-05-25": {}
