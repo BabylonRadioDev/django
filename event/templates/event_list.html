@@ -4,50 +4,40 @@
 <!-- link to events list page -->
 <h1 class="jumbotron"><a href="http://localhost:8000/events">Events</a></h1>
 <div class="container">
-    <div class="row">
-      <!-- galery fot the event with bootstrap tags -->
-     {% for eve in eventList %}
-        <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 ">
-            <div class="hovereffect">
-                <img src="{{ eve.image.url }}">
-                <div class="overlay">
-                    <h2>{{ eve.title }}</h2>
-                        <a class="info2">{{ eve.date_start|date:'d M Y - H:m' }}</a>
-                        <a href="{{ eve.slug }}" class="info">More Information</a>
+      <div class="row">
+        <!-- HERE The test if there is a GET parameter such as year / day / month -->
+        <!-- If there is we print only the event on the day choose -->
+        {% if request.method == 'GET' and 'year' in request.GET %}
+          {% for eve in eventList %}
+            {% if eve.date_start|date:'d' == request.GET.day and eve.date_start|date:'m' == request.GET.month and eve.date_start|date:'Y' == request.GET.year%}
+              <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 ">
+                  <div class="hovereffect">
+                      <img src="{{ eve.image.url }}">
+                      <div class="overlay">
+                          <h2>{{ eve.title }}</h2>
+                              <a class="info2">{{ eve.date_start|date:'d M Y - H:m' }}</a>
+                              <a href="{{ eve.slug }}" class="info">More Information</a>
+                      </div>
+                  </div>
+              </div>
+            {% endif %}
+          {% endfor %}
+        <!-- If there is no get parameter we print all the event -->
+        {% else %}
+          {% for eve in eventList %}
+            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 ">
+                <div class="hovereffect">
+                    <img src="{{ eve.image.url }}">
+                    <div class="overlay">
+                        <h2>{{ eve.title }}</h2>
+                            <a class="info2">{{ eve.date_start|date:'d M Y - H:m' }}</a>
+                            <a href="{{ eve.slug }}" class="info">More Information</a>
+                    </div>
                 </div>
             </div>
-        </div>
-        {% endfor %}
-    </div>
-    <!--
-    <div class="col-lg-7">
-        <table class="table table-hover">
-               <center><thead class="thead">
-               <tr>
-                  <th></th>
-                  <th></th>
-                  <th></th>
-                  <th></th>
-                </tr>
-              </thead></center>
-            <div class="pagination">
-            {% for eve in eventList %}
-                <tr>
-                    <td><strong>{{ eve.title }}</strong><br>{{ eve.date_start|date:'H:m - d M Y' }}</td>
-                    <td><strong>End at : </strong> {{ eve.date_end }}</td>
-                    <td>{% if eve.paying == 1 %}
-                            $ $
-                        {% else %}
-                            Free
-                        {% endif %}
-                    </td>
-
-                    <td><a href="http://localhost:8000/event/{{ eve.id }}">Click !</a></td>
-                </tr>
-            {% endfor %}<br><br>
-        </div></table>
-    </div>
-     -->
+          {% endfor %}
+        {% endif %}
+      </div>
     <div class="col-lg-6 col-md-4 col-sm-6 col-xs-6">
     <!-- Responsive calendar - START -->
         <div class="responsive-calendar">
@@ -86,29 +76,6 @@
 <script src="../../static/js/jquery.js"></script>
 <script src="../../static/js/bootstrap.min.js"></script>
 <script src="../../static/js/responsive-calendar.js"></script>
-<!-- script test  -->
-<script type="text/javascript">
-    $(document).ready(function (){
-        $(".responsive-list").responsiveList({
-           this.time=new Date();
-           this.currentYear=this.time.getFullYear();
-           this.currentMonth=this.time.getMonth();
-           {% for eve in eventList %}
-                if({{ eve.date_start|date:'Y' }} == currentYear){
-                    alert("{{ eve.title }}");
-                    if({{ eve.date_start|date:'M' }} == currentMonth){
-                        alert("{{ eve.title }}");
-                    }
-                    else{
-                        alert("Nop nop nop");
-                    }
-                }else{
-                        alert("Nop nop nop");
-                    }
-            {% endfor %}
-        });
-    });
-</script>
 <!-- credit calendar : http://w3widgets.com/responsive-calendar/#licenseModal -->
 <script type="text/javascript">
   $(document).ready(function () {
@@ -117,7 +84,7 @@
       events: {
         {% for eve in eventList %}
             {% for eve2 in eventList %}
-                "{{ eve.date_start|date:'Y-m-d' }}":  {/*"number": 1, */"url": "http://localhost:8000/event/{{ eve.id }}"},
+                "{{ eve.date_start|date:'Y-m-d' }}":  {/*"number": 1, */"url": "http://localhost:8000/events/?year={{ eve.date_start|date:'Y' }}&month={{ eve.date_start|date:'m' }}&day={{ eve.date_start|date:'d' }}"},
             {% endfor %}
         {% endfor %}
             "1994-05-25": {}
