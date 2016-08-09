@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h3>{{ object.title }}</h3>
+
+<img src="{{ object.image.url }}" />
+
+<h4>{{ object.intro }}</h4>
+
+<p>{{ object.body.html|safe }}</p>
+
+{% endblock %}

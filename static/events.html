@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block content %}
+<hr>
+<ul>
+    <h2>{{ event.title }}</h2>
+    <h4>{{ event.location }}</h4>
+    <img src="{{ event.main_image }}">
+    <p>Start at : {{ event.date_start }} - End at {{ event.date_end }}</p>
+    <h4>Description :</h4>
+    <p>{{ event.description}}</p><hr>
+    <p><h2>TICKET HERE</h2></p>
+    <!--<p>{{ ticketHere.name }}</p>
+    <p>Price of the ticket : {{ ticketHere.price }}</p>
+    <p>Ticket remaining : {{ticketHere.sold }} / {{ ticketHere.quantity }}</p>-->
+    <table>
+        {% for tick in listTik %}
+            <tr>
+                <td><h3>Type of the ticket : {{ tick.name }}</h3></td>
+            </tr>
+            <tr>
+                <td><strong>Ticket price :</strong> {{ tick.price }}</td>
+                <td><strong>Ticket remaining :</strong> {{ tick.sold }} / {{ tick.price }}</td>
+            </tr>
+            <tr>
+                <td><a href="http://www.google.com" target="_blank">Buy My ticket now ! (stripe?)</a></td>
+            </tr>
+        {% endfor %}
+    </table><br>
+    <hr>
+    <p><strong>Author : </strong>{{ event.author }} - <a href="{{ event.link }}">one link for the event</a></p>
+
+
+</ul><br>
+<hr>
+{% endblock %}

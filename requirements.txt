@@ -1,0 +1,16 @@
+Django==1.9.8
+django-allauth==0.26.1
+django-appconf==1.0.2
+django-autoslug==1.9.3
+django-crispy-forms==1.6.0
+django-debug-toolbar==1.5
+django-sirtrevor==0.2.4
+django-sitetree==1.5.1
+markdown2==2.3.1
+oauthlib==1.1.2
+Pillow==3.3.0
+python-openid==2.2.5
+requests==2.10.0
+requests-oauthlib==0.6.2
+six==1.10.0
+sqlparse==0.2.0

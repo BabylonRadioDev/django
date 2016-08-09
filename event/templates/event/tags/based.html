@@ -1,0 +1,27 @@
+{% extends template %}
+{# load staticfiles #}
+
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-12">
+
+            <div class="row adds">
+
+                <h3 align="center">{{ entry.title }}</h3>
+
+                <div class="col-md-6">
+                    <h4>
+                        <a href="{% url 'event:event-detail' entry.slug %}">{{ entry.title }}</a>
+                    </h4>
+                    {{ entry.description.html|truncatechars:106|safe }}
+                </div>
+
+                <div class="col-md-6">
+                    <img src="{{ entry.main_image.url }}" class="img-responsive" align="left"/>
+                </div>
+
+            </div>
+        </div>
+    </div>
+{% endblock %}

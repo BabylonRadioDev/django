@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% load account %}
+
+{% load i18n %}
+
+{% block content %}
+<section id="about-us">
+    <div class="container">
+
+        {% if user.is_authenticated %}
+
+        <h2 class="center">Welcome, {{ user.username }}!</h2>
+        {% endif %}
+
+    </div>
+</section>
+
+{% endblock %}
