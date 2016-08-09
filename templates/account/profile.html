@@ -10,6 +10,11 @@
         {% if user.is_authenticated %}
 
         <h2 class="center">Welcome, {{ user.username }}!</h2>
+
+        {% else %}
+        <h2 class="center">You are not loged in</h2>
+        <p>To log in please go to <a href="{% url 'account_login' %}">Login Page</a>
+
         {% endif %}
 
     </div>
