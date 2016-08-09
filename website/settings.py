@@ -38,7 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-
+    'pinax.stripe',
 
     'home',
     ### All Auth req
@@ -165,3 +165,6 @@ MEDIA_URL = "/media/"
 MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), "media_cdn")
 
 
+# Pinax Stripe
+PINAX_STRIPE_PUBLIC_KEY = os.environ.get("STRIPE_PUBLIC_KEY", "sk_test_m1PH6q5oeJvNXIvPffuS9s9g")
+PINAX_STRIPE_SECRET_KEY = os.environ.get("STRIPE_SECRET_KEY", "pk_test_usSLzlhYhaVw06aiQ8HBdkcE")

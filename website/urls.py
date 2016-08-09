@@ -29,6 +29,7 @@ urlpatterns = [
     url(r'^sirtrevor/', include('sirtrevor.urls')),
     url(r'^__debug__/', include(debug_toolbar.urls)),
     url(r'^accounts/', include('allauth.urls')),
+    url(r"^payments/", include("pinax.stripe.urls")),
 ]
 
 
