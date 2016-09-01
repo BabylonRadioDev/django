@@ -49,6 +49,7 @@ INSTALLED_APPS = [
 
     'event',
     'blog',
+    'join',
 
     'sirtrevor',
     'sitetree',

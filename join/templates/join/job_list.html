@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block content %}
+<!-- link to job offers list page -->
+<h1 class="jumbotron"><a href="http://localhost:8000/join">Join Us</a></h1>
+<div class="container">
+	<div class = "row">
+	{% if offers_list %}
+		<ul>
+		{% for offer in offers_list %}
+			<li><a href="/join/{{ offer.slug }}" class="info">{{offer.title}}</a></li>
+		{% endfor %}
+		</ul>
+	{% else %}
+		<p>No offers are available.</p>
+	{% endif %}
+	</div>
+</div>
+{% endblock %}

@@ -26,6 +26,7 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^events/', include('event.urls', namespace='event')),
     url(r'^blog/', include('blog.urls', namespace='blog')),
+    url(r'^join/', include('join.urls', namespace='join')),
     url(r'^sirtrevor/', include('sirtrevor.urls')),
     url(r'^__debug__/', include(debug_toolbar.urls)),
     url(r'^accounts/', include('allauth.urls')),

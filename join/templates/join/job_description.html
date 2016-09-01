@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block content %}
+<!-- link to job offers list page -->
+<h1 class="jumbotron"><a href="http://localhost:8000/join">Join Us</a></h1>
+<div class="container">
+	<div class="row">
+	<ul>
+	{% for item in jo %}
+		<h1 class="text-center">{{item.title}}</h1>
+		<h2>Category:&nbsp{{item.category}}</h2>
+		<h3>Dates</h3>
+		<p>{{item.publication_date}}&emsp;&emsp;{{item.end_date}}</p>
+		<h3>Role Summary</h3>
+		<p>{{item.roles_summary}}</p>
+		<h3>Responsabilities</h3>
+		<p>{{item.responsabilities}}</p>
+		<h3>Requirements</h3>
+		<p>{{item.requirements}}</p>
+		<p>If you find this opportunity suitable for you, send us your CV today. All applications will be considered.</p>
+	{% endfor %}
+	
+	<form action="#" method="POST" enctype="multipart/form-data">
+		<p><input name="docfile" type="file" id="file" /></p>
+		<p><input type="submit" value="Submit File" id="submit" /></p>
+		{% csrf_token %}
+	</form>
+
+	</ul>
+	</div>
+</div>
+{% endblock %}
